@@ -11,7 +11,7 @@
 Cả 4 options (A, B, C, D) dùng chung **~70% khung bối cảnh và tài nguyên**:
 - **Context screen:** Lab Coach Dashboard trong một buổi thực hành lab (Session 02: LoRA & VRAM Optimization, 24 active learners, thời gian còn lại 35 phút).
 - **Content/data fixture:** Scenario learner bị kẹt với lỗi VRAM / CUDA Out of Memory ở Checkpoint 2 khi chèn LoRA adapter (`target_modules`, `batch_size`, `gradient_checkpointing`).
-- **Component & visual style:** Dark mode theme (Inter font, card layout, badge status, modal overlay, button components).
+- **Component & visual style:** Premium Dark mode theme với hiệu ứng Glassmorphism (sử dụng 2 font Outfit & Inter, transluscent cards với backdrop blur, glowing badge status, blurred modal overlay, dynamic gradient buttons và micro-animations).
 - **Task & desired outcome:** Lab Coach nhận diện tình huống, đưa ra hành động hỗ trợ phù hợp (triage 1:1, broadcast hướng dẫn chung, follow-up riêng hoặc defer) mà không coi một behavioral signal là proof of struggle.
 
 ---
@@ -19,7 +19,7 @@ Cả 4 options (A, B, C, D) dùng chung **~70% khung bối cảnh và tài nguy�
 ## 2. Option C — Common-Issue Cluster View Prototype
 
 ### Link Prototype
-👉 [Link chạy Prototype Option C](file:///c:/Users/Admin/Desktop/AILAB/Day18/Track1-DAY18-ChanToDe/day18-work/prototypes/option-c/index.html)
+👉 [Link chạy Prototype Option C](file:///c:/Users/Admin/Desktop/AILAB/Day18/Track1-DAY18-ChanToDe/day18-work/prototypes/option-c-prototype.html)
 
 ### Flow 3 bước theo Scope chuẩn
 
@@ -88,4 +88,4 @@ Không giải thích nút "Tách case" hay nhắc tester sửa nội dung broadc
 
 ## GATE 4 — Test-ready Confirmation
 
-- [x] Một người không build có thể tự mở file `prototypes/option-c/index.html`, thực hiện task triage/broadcast/split-case và quay về context ban đầu qua nút Reset mà không cần người khác giải thích.
+- [x] Một người không build có thể tự mở file `prototypes/option-c-prototype.html`, thực hiện task triage/broadcast/split-case và quay về context ban đầu qua nút Reset mà không cần người khác giải thích.
