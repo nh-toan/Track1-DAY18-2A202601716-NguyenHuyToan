@@ -10,48 +10,48 @@
 
 | Thành phần | Quyết định chung cho A/B/C |
 | --- | --- |
-| **Target user** | TA/mentor đang hỗ trợ learner trong lab hoặc online lesson. Learner là người bị ảnh hưởng và giữ quyền chọn phản hồi/opt-out. |
-| **Situation** | Trong một buổi lab có thời gian/capacity hạn chế; learner có thể kẹt nhưng chưa chủ động hỏi, còn TA nhận các tín hiệu rời rạc. |
+| **Target user** | Lab Coach / mentor đang hỗ trợ learner trong lab hoặc online lesson. Learner là người bị ảnh hưởng và giữ quyền chọn phản hồi/opt-out. |
+| **Situation** | Trong một buổi lab có thời gian/capacity hạn chế; learner có thể kẹt nhưng chưa chủ động hỏi, còn Lab Coach nhận các tín hiệu rời rạc. |
 | **Task** | Quyết định hỗ trợ gì trước: check-in 1:1, broadcast hướng dẫn chung, follow-up/ticket, hay defer khi chưa đủ evidence/capacity. |
-| **Desired outcome** | TA chọn được hành động phù hợp và giải thích được lý do; learner nhận hỗ trợ tôn trọng autonomy/privacy; không coi một behavioral signal là proof của struggle. |
-| **Content/data feature** | Chỉ dùng dữ liệu có ngữ cảnh và/hoặc được learner đồng ý chia sẻ: checkpoint/issue description, help request, self-reported status, error chủ đề, thời điểm, nguồn signal và khả năng TA. Không dùng dwell time, AI/search use hoặc im lặng một mình để gắn nhãn learner. |
+| **Desired outcome** | Lab Coach chọn được hành động phù hợp và giải thích được lý do; learner nhận hỗ trợ tôn trọng autonomy/privacy; không coi một behavioral signal là proof của struggle. |
+| **Content/data feature** | Chỉ dùng dữ liệu có ngữ cảnh và/hoặc được learner đồng ý chia sẻ: checkpoint/issue description, help request, self-reported status, error chủ đề, thời điểm, nguồn signal và khả năng của Lab Coach. Không dùng dwell time, AI/search use hoặc im lặng một mình để gắn nhãn learner. |
 
 ## 2. Ba cách giải
 
-| Thành phần khác biệt | **Option A — Evidence-backed triage digest** | **Option B — Mentor-approved check-in** | **Option C — Common-issue cluster view** |
+| Thành phần khác biệt | **Option A — Evidence-backed triage digest** | **Option B — Coach-approved check-in** | **Option C — Common-issue cluster view** |
 | --- | --- | --- | --- |
-| **Solution mechanism** | AI tổng hợp nhiều signal có ngữ cảnh thành evidence card theo từng learner/case để TA review và chọn hành động. | AI soạn một check-in ngắn, dựa trên issue/context đã được learner chia sẻ; TA duyệt/chỉnh trước khi gửi. | AI nhóm các issue/error được learner opt-in chia sẻ thành cụm lỗi chung; TA review rồi chọn broadcast hoặc follow-up riêng. |
-| **User làm gì?** | TA đọc nguồn, timeline và phần thiếu; chọn check-in, follow-up, broadcast, defer hoặc dismiss. | TA chọn recipient, sửa giọng điệu/nội dung, gửi hoặc bỏ qua. Learner có thể trả lời, bỏ qua hoặc opt-out. | TA xem cụm, kiểm tra ví dụ/source, chọn broadcast hướng dẫn chung, hỏi thêm, tạo follow-up riêng hoặc bỏ qua. |
+| **Solution mechanism** | AI tổng hợp nhiều signal có ngữ cảnh thành evidence card theo từng learner/case để Lab Coach review và chọn hành động. | AI soạn một check-in ngắn, dựa trên issue/context đã được learner chia sẻ; Lab Coach duyệt/chỉnh trước khi gửi. | AI nhóm các issue/error được learner opt-in chia sẻ thành cụm lỗi chung; Lab Coach review rồi chọn broadcast hoặc follow-up riêng. |
+| **User làm gì?** | Lab Coach đọc nguồn, timeline và phần thiếu; chọn check-in, follow-up, broadcast, defer hoặc dismiss. | Lab Coach chọn recipient, sửa giọng điệu/nội dung, gửi hoặc bỏ qua. Learner có thể trả lời, bỏ qua hoặc opt-out. | Lab Coach xem cụm, kiểm tra ví dụ/source, chọn broadcast hướng dẫn chung, hỏi thêm, tạo follow-up riêng hoặc bỏ qua. |
 | **AI làm gì?** | Tóm tắt/nhóm evidence, nêu uncertainty và đề xuất **các** action khả dĩ; không tự ưu tiên hay gửi hỗ trợ. | Tạo bản nháp có thể chỉnh sửa, gợi ý một câu hỏi làm rõ; không tự gửi, không tự escalation. | Phát hiện điểm chung từ issue/error text được phép dùng, nêu số lượng/mức không chắc chắn và draft nội dung broadcast; không tự broadcast. |
-| **Trigger** | TA chủ động mở digest khi bắt đầu checkpoint hoặc khi có request/signal mới; không có auto-alert từ một signal đơn lẻ. | TA khởi tạo check-in từ một case đã có context, hoặc sau learner tự báo “cần hỗ trợ”; không tự nhắn chỉ vì learner im lặng. | TA mở khi nhiều learner opt-in báo lỗi/issue tương tự hoặc khi TA muốn review checkpoint theo chủ đề. |
+| **Trigger** | Lab Coach chủ động mở digest khi bắt đầu checkpoint hoặc khi có request/signal mới; không có auto-alert từ một signal đơn lẻ. | Lab Coach khởi tạo check-in từ một case đã có context, hoặc sau learner tự báo “cần hỗ trợ”; không tự nhắn chỉ vì learner im lặng. | Lab Coach mở khi nhiều learner opt-in báo lỗi/issue tương tự hoặc khi Lab Coach muốn review checkpoint theo chủ đề. |
 | **Trade-off chính** | Evidence minh bạch và hỗ trợ triage tốt, nhưng card có thể nhiều thông tin và vẫn tốn thời gian review. | Giảm rào cản tiếp cận với learner ngại hỏi, nhưng tạo thêm thông điệp/notification và cần bảo vệ quyền không phản hồi. | Hỗ trợ lỗi lặp lại, tiết kiệm capacity, nhưng có nguy cơ làm mờ nhu cầu cá nhân hoặc gom sai các lỗi chỉ trông giống nhau. |
 
 ## 3. Mô tả ngắn từng option để dùng khi prototype
 
 ### Option A — Evidence-backed triage digest
 
-TA nhận một danh sách **evidence card**, mỗi card ghi rõ: nguồn signal, thời điểm, issue/checkpoint liên quan, thông tin còn thiếu và các hành động có thể chọn. Ví dụ: *“Learner A tự báo ‘kẹt VRAM’ sau checkpoint 2, đã thử theo slide; chưa có help request. Không đủ dữ liệu để kết luận mức độ kẹt. Gợi ý: mở check-in / xem chi tiết / defer.”*
+Lab Coach nhận một danh sách **evidence card**, mỗi card ghi rõ: nguồn signal, thời điểm, issue/checkpoint liên quan, thông tin còn thiếu và các hành động có thể chọn. Ví dụ: *“Learner A tự báo ‘kẹt VRAM’ sau checkpoint 2, đã thử theo slide; chưa có help request. Không đủ dữ liệu để kết luận mức độ kẹt. Gợi ý: mở check-in / xem chi tiết / defer.”*
 
-- **Giá trị cần test:** Card có giúp TA hành động nhanh hơn mà vẫn hiểu lý do và uncertainty không?
-- **Rủi ro cần test:** Card có biến thành một priority queue “hộp đen” hoặc làm TA quá tải thông tin không?
+- **Giá trị cần test:** Card có giúp Lab Coach hành động nhanh hơn mà vẫn hiểu lý do và uncertainty không?
+- **Rủi ro cần test:** Card có biến thành một priority queue “hộp đen” hoặc làm Lab Coach quá tải thông tin không?
 
-### Option B — Mentor-approved check-in
+### Option B — Coach-approved check-in
 
-TA mở một case có context và nhận bản nháp check-in, ví dụ: *“Mình thấy bạn đã ghi nhận lỗi VRAM ở checkpoint 2. Bạn muốn (A) nhận hướng dẫn giảm VRAM, (B) đặt câu hỏi cho TA, hay (C) tự tiếp tục và không cần follow-up?”* TA sửa và chủ động gửi; learner có thể trả lời, bỏ qua hoặc opt-out.
+Lab Coach mở một case có context và nhận bản nháp check-in, ví dụ: *“Mình thấy bạn đã ghi nhận lỗi VRAM ở checkpoint 2. Bạn muốn (A) nhận hướng dẫn giảm VRAM, (B) đặt câu hỏi cho Lab Coach, hay (C) tự tiếp tục và không cần follow-up?”* Lab Coach sửa và chủ động gửi; learner có thể trả lời, bỏ qua hoặc opt-out.
 
 - **Giá trị cần test:** Check-in có giảm barrier hỏi hỗ trợ mà không tạo cảm giác bị theo dõi không?
 - **Rủi ro cần test:** Learner có diễn giải message như một phán xét/ép buộc phải trả lời không?
 
 ### Option C — Common-issue cluster view
 
-TA thấy một cụm như: *“4 learner đã opt-in chia sẻ lỗi liên quan đến VRAM/configuration trong 20 phút qua; 2 người đã thử đọc lại slide. Cụm chỉ dựa vào nội dung issue, không suy ra họ đang struggle.”* TA chọn draft broadcast, chỉnh sửa, gửi cho nhóm liên quan hoặc tạo follow-up riêng.
+Lab Coach thấy một cụm như: *“4 learner đã opt-in chia sẻ lỗi liên quan đến VRAM/configuration trong 20 phút qua; 2 người đã thử đọc lại slide. Cụm chỉ dựa vào nội dung issue, không suy ra họ đang struggle.”* Lab Coach chọn draft broadcast, chỉnh sửa, gửi cho nhóm liên quan hoặc tạo follow-up riêng.
 
-- **Giá trị cần test:** Cụm có giúp TA xử lý lỗi chung nhanh hơn và giải phóng capacity không?
+- **Giá trị cần test:** Cụm có giúp Lab Coach xử lý lỗi chung nhanh hơn và giải phóng capacity không?
 - **Rủi ro cần test:** Việc gom cụm có che mất learner cần hỗ trợ 1:1 hoặc broadcast sai ngữ cảnh không?
 
 ## 4. Distance check
 
-- **A khác B:** A ưu tiên *TA review evidence rồi tự chọn action*; B ưu tiên *TA chủ động tạo và duyệt một cuộc check-in tới learner*. A là công cụ triage, B là công cụ giao tiếp có human approval.
+- **A khác B:** A ưu tiên *Lab Coach review evidence rồi tự chọn action*; B ưu tiên *Lab Coach chủ động tạo và duyệt một cuộc check-in tới learner*. A là công cụ triage, B là công cụ giao tiếp có human approval.
 - **B khác C:** B giải quyết *một learner/case* và cần consent/opt-out ở mức cá nhân; C giải quyết *pattern nhiều learner* và quyết định broadcast hay follow-up.
 - **A khác C:** A nhóm evidence theo **case/learner** để giữ bối cảnh; C nhóm theo **issue chung** để tối ưu xử lý hàng loạt. C không tự tạo ranking cá nhân.
 
@@ -64,6 +64,7 @@ TA thấy một cụm như: *“4 learner đã opt-in chia sẻ lỗi liên quan
 - [x] Có ít nhất ba option (không chỉ một feature với ba tên khác nhau).
 - [x] Đã nêu rõ các rủi ro để test; chưa chốt option thắng trước khi prototype/test.
 
+<<<<<<< HEAD
 
 ## 5. Option D dự phòng — Learner-initiated help brief
 
@@ -91,3 +92,5 @@ Learner chủ động bấm **“Cần hỗ trợ”**, chọn loại hỗ trợ
 - **D khác A:** A bắt đầu từ evidence mà TA review; D bắt đầu từ **request do learner chủ động tạo**. A hỗ trợ TA triage, D giảm barrier để learner diễn đạt nhu cầu.
 - **D khác B:** B là **TA-initiated check-in** tới learner; D là **learner-initiated request** tới TA. B kiểm tra cách tiếp cận chủ động của mentor, D kiểm tra autonomy và khả năng tự gọi hỗ trợ.
 - **D khác C:** C xử lý pattern lỗi của nhiều learner; D giữ ngữ cảnh và quyền chọn dữ liệu của **một learner**. C ưu tiên broadcast/cluster, D ưu tiên request hỗ trợ có cấu trúc.
+=======
+>>>>>>> 4de4edd35abb74091a255faf670abade842aabd1
