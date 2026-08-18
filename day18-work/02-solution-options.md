@@ -63,3 +63,31 @@ TA thấy một cụm như: *“4 learner đã opt-in chia sẻ lỗi liên quan
 - [x] A/B/C khác nhau ở cơ chế, vai trò user/AI, trigger và trade-off.
 - [x] Có ít nhất ba option (không chỉ một feature với ba tên khác nhau).
 - [x] Đã nêu rõ các rủi ro để test; chưa chốt option thắng trước khi prototype/test.
+
+
+## 5. Option D dự phòng — Learner-initiated help brief
+
+> **Vai trò:** Đây là candidate thứ tư để nhóm cân nhắc/so sánh. Khi đi qua Gate 2 chính thức, nhóm vẫn chọn **ba** option mạnh nhất để prototype.
+
+### Cơ chế
+
+Learner chủ động bấm **“Cần hỗ trợ”**, chọn loại hỗ trợ mong muốn và mô tả ngắn: lỗi/khái niệm đang kẹt, điều đã thử, và checkpoint liên quan. AI chỉ hỗ trợ biến thông tin đó thành một **help brief** rõ ràng. Learner xem, sửa, chọn dữ liệu đính kèm và xác nhận gửi; TA/mentor nhận một request có context rồi tự quyết định check-in, hỗ trợ 1:1, hướng dẫn chung, ticket hoặc defer.
+
+| Thành phần | Option D — Learner-initiated help brief |
+| --- | --- |
+| **Solution mechanism** | Learner tự khởi tạo một support request có cấu trúc; AI giúp tổ chức/tóm tắt thông tin đã được learner cung cấp hoặc đồng ý đính kèm. |
+| **User làm gì?** | **Learner:** chọn loại hỗ trợ, viết/sửa help brief, quyết định dữ liệu nào được gửi và xác nhận gửi hoặc tự tiếp tục. **TA:** review request và chọn cách phản hồi. |
+| **AI làm gì?** | Gợi ý một câu hỏi làm rõ, tóm tắt symptom–điều đã thử–mục tiêu hỗ trợ và tạo bản nháp. AI không tự đính kèm dữ liệu, gửi request hay xếp mức ưu tiên. |
+| **Trigger** | Chỉ do learner chủ động chọn “Cần hỗ trợ”; không trigger từ im lặng, dwell time, AI/search use hoặc suy luận hành vi. |
+| **Trade-off chính** | Autonomy/privacy cao và TA nhận được context rõ hơn, nhưng không giải quyết hết silent struggle của learner không khởi tạo request; cần test liệu form có làm tăng hay giảm barrier hỏi hỗ trợ. |
+
+### Giá trị và rủi ro cần test
+
+- **Giá trị:** Learner có cảm thấy việc gửi request dễ hơn so với viết một câu hỏi tự do/đợi TA không? TA có nhận được đủ bối cảnh để giảm số lượt hỏi lại không?
+- **Rủi ro:** Form có khiến learner thấy phải cung cấp quá nhiều thông tin hoặc bỏ cuộc trước khi gửi không? Learner có hiểu AI chỉ dựa trên dữ liệu họ chọn chia sẻ không?
+
+### Distance check với A/B/C
+
+- **D khác A:** A bắt đầu từ evidence mà TA review; D bắt đầu từ **request do learner chủ động tạo**. A hỗ trợ TA triage, D giảm barrier để learner diễn đạt nhu cầu.
+- **D khác B:** B là **TA-initiated check-in** tới learner; D là **learner-initiated request** tới TA. B kiểm tra cách tiếp cận chủ động của mentor, D kiểm tra autonomy và khả năng tự gọi hỗ trợ.
+- **D khác C:** C xử lý pattern lỗi của nhiều learner; D giữ ngữ cảnh và quyền chọn dữ liệu của **một learner**. C ưu tiên broadcast/cluster, D ưu tiên request hỗ trợ có cấu trúc.

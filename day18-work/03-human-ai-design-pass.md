@@ -75,3 +75,29 @@
 - [x] Capability, limit, evidence và uncertainty được hiển thị cụ thể.
 - [x] User có đường edit/reject/dismiss/snooze/defer hoặc opt-out để kiểm soát và phục hồi.
 - [x] Có data/feedback check cho dữ liệu nhạy cảm và quyền rút lại của learner.
+
+
+## 5. Human–AI Decision Pass — Option D dự phòng: Learner-initiated help brief
+
+> **Critical interaction:** Learner muốn nhờ hỗ trợ cho lỗi/khái niệm đang kẹt nhưng chưa biết phải viết gì hoặc có nên chia sẻ checkpoint nào. AI chỉ hỗ trợ cấu trúc thông tin; learner xác nhận trước khi bất cứ dữ liệu nào tới TA.
+
+| Human–AI decision | Option D — Learner-initiated help brief |
+| --- | --- |
+| **User làm gì? AI làm gì?** | **Learner:** chủ động mở “Cần hỗ trợ”, chọn loại hỗ trợ, mô tả lỗi/khái niệm, chọn điều đã thử và dữ liệu đính kèm, rồi sửa/xác nhận gửi hoặc tự tiếp tục. **TA:** review request và chọn check-in, trả lời, broadcast, ticket hoặc defer. **AI:** đề xuất cấu trúc symptom–điều đã thử–mục tiêu hỗ trợ, tóm tắt bản nháp và hỏi một câu làm rõ khi cần. |
+| **AI Act / Ask / Don’t Act? Vì sao?** | **Ask, không Act.** AI có thể hỏi learner có muốn đưa checkpoint/điều đã thử vào brief không, nhưng không tự lấy/đính kèm dữ liệu, không tự gửi request và không tự xếp ưu tiên. Việc chia sẻ thông tin và gọi hỗ trợ thuộc quyền learner; TA giữ quyết định phản hồi. |
+| **User hiểu capability/limit bằng gì?** | Màn hình nói rõ: “AI chỉ giúp bạn viết yêu cầu từ thông tin bạn nhập/chọn; AI không xem tiến độ ẩn, không đánh giá năng lực và không bảo đảm TA phản hồi ngay.” Trước khi gửi, learner thấy phần nào sẽ được gửi cho TA. |
+| **Evidence/uncertainty được thể hiện thế nào?** | Brief chia rõ `Learner tự mô tả`, `Learner chọn đính kèm`, `Điều đã thử`, `Câu hỏi cần hỗ trợ` và `Thông tin còn thiếu`. Nếu learner bỏ trống context, AI hiện “TA có thể cần hỏi thêm”, thay vì suy đoán nguyên nhân hoặc mức độ kẹt. |
+| **User kiểm soát và recovery thế nào?** | Learner có `Sửa`, `Xóa đính kèm`, `Lưu nháp`, `Không gửi/Tự tiếp tục` và `Gửi sau confirmation`; sau khi gửi có thể gửi correction hoặc yêu cầu hủy follow-up nếu chưa được xử lý. TA có thể `Yêu cầu làm rõ`, `Defer`, `Chuyển ticket` hoặc phản hồi; không có thao tác nào tự động thay learner quyết định chia sẻ. |
+
+### Điều cần test ở Option D
+
+1. Learner có hoàn thành help brief và gửi request dễ hơn so với việc tự viết câu hỏi tự do không?
+2. Learner có hiểu chính xác dữ liệu nào được gửi và có cảm thấy đủ quyền `Không gửi/Tự tiếp tục` không?
+3. TA có nhận được đủ context để chọn cách hỗ trợ mà không phải hỏi lại quá nhiều không?
+4. Khi learner không khởi tạo request, Option D không cung cấp signal nào cho TA—đây là giới hạn được hiển thị rõ, không phải lỗi để AI tự suy đoán.
+
+### Feedback and data check cho Option D
+
+- `Sửa/Xóa/Lưu nháp/Không gửi` có hiệu lực ngay trong phiên hiện tại; prototype không lưu dữ liệu để huấn luyện mô hình.
+- Learner chọn từng checkpoint/đính kèm trước khi chia sẻ và có thể từ chối mọi đính kèm.
+- Feedback của TA về brief chỉ hỗ trợ phản hồi trong case hiện tại; không tự thay đổi cách AI đánh giá learner ở các phiên sau.
