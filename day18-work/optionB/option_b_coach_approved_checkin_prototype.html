@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Option B — Coach-approved check-in</title>
+<style>
+  :root{
+    --bg:#f5f7fb; --card:#fff; --text:#172033; --muted:#65708a; --line:#dfe5ef;
+    --primary:#3259ff; --primary2:#2445d9; --soft:#eef2ff; --ok:#0c7a56; --warn:#a35b00;
+    --shadow:0 12px 32px rgba(22,34,66,.10);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+  button,textarea,input{font:inherit}
+  button{cursor:pointer}
+  .app{min-height:100vh;display:grid;grid-template-rows:auto 1fr}
+  .topbar{height:62px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10}
+  .brand{font-weight:800;letter-spacing:-.02em}.brand span{color:var(--primary)}
+  .status{font-size:13px;color:var(--muted);display:flex;gap:12px;align-items:center}
+  .pill{padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:#fff}
+  .layout{width:min(1160px,calc(100% - 36px));margin:26px auto 60px;display:grid;grid-template-columns:300px 1fr;gap:22px}
+  .sidebar,.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+  .sidebar{padding:20px;height:max-content;position:sticky;top:86px}
+  .eyebrow{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#6f7b97;margin-bottom:8px}
+  h1{font-size:22px;line-height:1.18;margin:0 0 10px;letter-spacing:-.02em}
+  h2{font-size:18px;margin:0 0 8px}.muted{color:var(--muted)}
+  .sidebar p{font-size:14px;line-height:1.5;margin:0 0 18px;color:var(--muted)}
+  .steps{display:grid;gap:9px;margin:18px 0}
+  .step{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:12px;color:var(--muted);font-size:14px}
+  .step.active{background:var(--soft);color:var(--text);font-weight:700}
+  .num{width:24px;height:24px;border-radius:50%;background:#edf0f6;display:grid;place-items:center;font-size:12px;flex:0 0 24px}.active .num{background:var(--primary);color:#fff}
+  .reset{width:100%;border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px 12px;font-weight:700;color:#34405c}.reset:hover{background:#f7f9fc}
+  .panel{overflow:hidden}.panelHead{padding:22px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:18px}
+  .panelBody{padding:24px}.screen{display:none}.screen.active{display:block}
+  .grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}
+  .card{border:1px solid var(--line);border-radius:16px;background:#fff;padding:18px}.card.soft{background:#fafbfe}.card + .card{margin-top:14px}
+  .label{font-size:12px;font-weight:800;color:#73809c;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
+  .kv{display:grid;grid-template-columns:120px 1fr;gap:8px 14px;font-size:14px;line-height:1.45}.kv div:nth-child(odd){color:var(--muted)}
+  .signal{display:flex;gap:10px;align-items:flex-start;padding:12px;background:#fff7e8;border:1px solid #f4ddb4;border-radius:12px;font-size:14px;line-height:1.45}
+  .dot{width:9px;height:9px;border-radius:50%;background:#f0a13a;margin-top:6px;flex:0 0 9px}
+  textarea{width:100%;min-height:170px;border:1px solid var(--line);border-radius:13px;padding:14px;resize:vertical;line-height:1.55;color:var(--text);outline:none}.textarea:focus,textarea:focus{border-color:#9eb0ff;box-shadow:0 0 0 3px #eef2ff}
+  .helper{font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:8px}
+  .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+  .btn{border:1px solid var(--line);background:#fff;padding:11px 15px;border-radius:11px;font-weight:750;color:#29344e}.btn:hover{background:#f7f9fc}.btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}.btn.primary:hover{background:var(--primary2)}
+  .btn.ghost{background:transparent}.btn.full{width:100%}
+  .phoneWrap{display:grid;place-items:center;padding:8px 0 14px}.phone{width:min(420px,100%);background:#f7f8fc;border:1px solid #ccd4e2;border-radius:28px;padding:16px;box-shadow:0 18px 40px rgba(28,40,76,.14)}
+  .phoneTop{height:28px;text-align:center;font-size:12px;color:#7a859c}.chat{background:#fff;border-radius:20px;padding:16px;min-height:500px}
+  .from{font-size:12px;color:var(--muted);margin-bottom:8px}.bubble{background:#f0f3f9;border-radius:16px 16px 16px 5px;padding:14px 15px;line-height:1.5;font-size:14.5px}
+  .choices{display:grid;gap:10px;margin-top:14px}.choice{display:flex;align-items:flex-start;gap:12px;text-align:left;border:1px solid var(--line);background:#fff;border-radius:14px;padding:13px 14px;transition:.15s}.choice:hover{border-color:#aab8ff;background:#f8f9ff;transform:translateY(-1px)}
+  .letter{width:28px;height:28px;border-radius:9px;background:var(--soft);color:var(--primary);display:grid;place-items:center;font-weight:900;flex:0 0 28px}.ctitle{font-weight:800;margin-bottom:3px}.cdesc{font-size:12.8px;color:var(--muted);line-height:1.4}
+  .privacy{margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.45}.linkBtn{border:0;background:none;padding:0;color:var(--primary);font-weight:750;text-decoration:underline;text-underline-offset:2px}
+  .result{width:min(620px,100%);margin:auto}.resultIcon{width:46px;height:46px;border-radius:14px;background:var(--soft);display:grid;place-items:center;font-size:22px;margin-bottom:14px}.result h2{font-size:22px}.result p{line-height:1.55;color:#4f5c76}
+  .controlBox{border:1px solid #cfe5dc;background:#f2fbf7;border-radius:14px;padding:14px 15px;margin:16px 0}.controlBox strong{color:var(--ok)}
+  .guidance{display:grid;gap:10px;margin:14px 0}.guideItem{border:1px solid var(--line);border-radius:12px;padding:12px 13px}.guideItem b{display:block;margin-bottom:4px}
+  .field{margin:14px 0}.field label{display:block;font-size:13px;font-weight:800;margin-bottom:7px}.field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px}.field textarea{min-height:110px}
+  .toast{position:fixed;right:22px;bottom:22px;background:#172033;color:white;padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(8px);pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:none}
+  .banner{background:#f8faff;border:1px solid #d9e0ff;border-radius:13px;padding:13px 14px;margin-bottom:16px;font-size:13.5px;line-height:1.45;color:#3b4662}.banner b{color:var(--text)}
+  .tag{display:inline-flex;padding:5px 8px;border-radius:999px;background:#f2f4f8;color:#56617a;font-size:12px;font-weight:750;margin-right:6px;margin-top:6px}
+  @media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{position:static}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">Lab <span>Support</span> · Prototype</div>
+    <div class="status"><span class="pill">Option B</span><span>Coach-approved check-in</span></div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="eyebrow">Tester task</div>
+      <h1>Giúp learner xử lý một check-in về lỗi VRAM</h1>
+      <p>Prototype này không yêu cầu facilitator giải thích. Hãy thao tác như bạn đang là Lab Coach, sau đó là learner.</p>
+      <div class="steps">
+        <div class="step active" id="s1"><div class="num">1</div><div>Duyệt context & draft</div></div>
+        <div class="step" id="s2"><div class="num">2</div><div>Nhận check-in</div></div>
+        <div class="step" id="s3"><div class="num">3</div><div>Chọn A / B / C</div></div>
+      </div>
+      <button class="reset" onclick="resetAll()">↻ Reset về common context</button>
+    </aside>
+
+    <section class="panel">
+      <div class="panelHead">
+        <div>
+          <div class="eyebrow" id="roleEyebrow">Lab Coach view</div>
+          <h2 id="screenTitle">Case L-07 · checkpoint 2</h2>
+          <div class="muted" id="screenSub">AI đã soạn draft; Coach quyết định có gửi hay không.</div>
+        </div>
+        <div><span class="pill" id="rolePill">Coach controls send</span></div>
+      </div>
+
+      <div class="panelBody">
+        <!-- SCREEN 1 -->
+        <div class="screen active" id="screen-coach">
+          <div class="banner"><b>Context chung cho cả ba lựa chọn:</b> Learner đang làm lab LoRA và đã ghi nhận lỗi VRAM tại checkpoint 2. Đây là một tín hiệu cần context thêm, không phải kết luận learner đang “struggle”.</div>
+          <div class="grid2">
+            <div>
+              <div class="card soft">
+                <div class="label">Evidence card</div>
+                <div class="kv">
+                  <div>Learner</div><div>L-07</div>
+                  <div>Task</div><div>Chạy checkpoint 2 của lab LoRA</div>
+                  <div>Signal</div><div>Ghi nhận lỗi VRAM ở checkpoint 2</div>
+                  <div>Nguồn</div><div>Checkpoint note của learner</div>
+                  <div>Chưa biết</div><div>Learner đã tự xử lý xong chưa; có muốn hỗ trợ hay không</div>
+                </div>
+                <div style="margin-top:14px" class="signal"><span class="dot"></span><div><b>Uncertainty:</b> lỗi VRAM có thể đã được learner tự xử lý. Không dùng signal này để gắn nhãn hay tự nâng mức ưu tiên.</div></div>
+              </div>
+              <div class="card">
+                <div class="label">Coach decision</div>
+                <div style="font-size:14px;line-height:1.5">Bạn có thể chỉnh câu chữ để message phù hợp ngữ cảnh lớp học. Learner luôn có thể bỏ qua, chọn “tự tiếp tục”, hoặc opt-out.</div>
+                <div>
+                  <span class="tag">Human-in-the-loop</span><span class="tag">No auto-send</span><span class="tag">Learner can decline</span>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="label">AI draft · editable</div>
+              <textarea id="draft">Mình thấy bạn đã ghi nhận lỗi VRAM ở checkpoint 2. Nếu bạn muốn, mình có thể giúp theo một trong ba cách dưới đây. Bạn không bắt buộc phải trả lời, và có thể chọn không nhận follow-up.
+
+(A) Nhận hướng dẫn giảm VRAM
+(B) Đặt câu hỏi cho Lab Coach
+(C) Tự tiếp tục và không cần follow-up</textarea>
+              <div class="helper">Draft chỉ dùng thông tin có trong case. Coach chịu trách nhiệm duyệt trước khi gửi.</div>
+              <div class="actions">
+                <button class="btn" onclick="showToast('Draft đã giữ nguyên. Chưa gửi.')">Để sau</button>
+                <button class="btn primary" onclick="sendDraft()">Duyệt & gửi check-in</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN 2 -->
+        <div class="screen" id="screen-learner">
+          <div class="phoneWrap">
+            <div class="phone">
+              <div class="phoneTop">Learner view</div>
+              <div class="chat">
+                <div class="from">Lab Coach · vừa gửi</div>
+                <div class="bubble" id="sentMessage"></div>
+                <div class="choices">
+                  <button class="choice" onclick="choose('A')"><div class="letter">A</div><div><div class="ctitle">Nhận hướng dẫn giảm VRAM</div><div class="cdesc">Xem vài bước ngắn trước; bạn quyết định có áp dụng hay không.</div></div></button>
+                  <button class="choice" onclick="choose('B')"><div class="letter">B</div><div><div class="ctitle">Đặt câu hỏi cho Lab Coach</div><div class="cdesc">Tự viết câu hỏi và chọn có gửi context kỹ thuật kèm theo hay không.</div></div></button>
+                  <button class="choice" onclick="choose('C')"><div class="letter">C</div><div><div class="ctitle">Tự tiếp tục, không cần follow-up</div><div class="cdesc">Kết thúc check-in này mà không cần giải thích lý do.</div></div></button>
+                </div>
+                <div class="privacy">Bạn có thể bỏ qua check-in này. <button class="linkBtn" onclick="optOut()">Không nhận check-in kiểu này nữa</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN A -->
+        <div class="screen" id="screen-A">
+          <div class="result">
+            <div class="resultIcon">🧩</div>
+            <div class="eyebrow">Bạn đã chọn A</div>
+            <h2>Hướng dẫn giảm VRAM — chỉ là gợi ý</h2>
+            <p>Bạn có thể thử từng bước, bỏ qua bước không phù hợp, hoặc chuyển sang hỏi Coach nếu context lab của bạn khác.</p>
+            <div class="guidance">
+              <div class="guideItem"><b>1. Giảm batch size / micro-batch</b><span class="muted">Giảm memory footprint trước khi thay đổi cấu hình lớn hơn.</span></div>
+              <div class="guideItem"><b>2. Bật gradient accumulation</b><span class="muted">Giữ effective batch size trong khi giảm memory mỗi step.</span></div>
+              <div class="guideItem"><b>3. Kiểm tra mixed precision</b><span class="muted">Dùng precision phù hợp với môi trường lab nếu notebook hỗ trợ.</span></div>
+            </div>
+            <div class="controlBox"><strong>Quyền kiểm soát của bạn:</strong> hướng dẫn không tự thay đổi notebook và không đánh dấu bạn là “cần hỗ trợ”.</div>
+            <div class="actions">
+              <button class="btn" onclick="backToChoices()">← Đổi lựa chọn</button>
+              <button class="btn primary" onclick="showToast('Đã đánh dấu: tự thử trước. Không có follow-up tự động.')">Mình sẽ tự thử trước</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN B -->
+        <div class="screen" id="screen-B">
+          <div class="result">
+            <div class="resultIcon">💬</div>
+            <div class="eyebrow">Bạn đã chọn B</div>
+            <h2>Viết câu hỏi cho Lab Coach</h2>
+            <p>Chỉ gửi những gì bạn muốn chia sẻ. Context kỹ thuật bên dưới là tùy chọn.</p>
+            <div class="field"><label>Câu hỏi của bạn</label><textarea id="question">Mình vẫn gặp OOM khi chạy checkpoint 2. Với cấu hình lab này, mình nên ưu tiên giảm batch size hay thay đổi precision trước?</textarea></div>
+            <div class="field"><label><input type="checkbox" id="includeContext" checked style="width:auto;margin-right:8px"> Gửi kèm context: “VRAM error · checkpoint 2 · LoRA lab”</label></div>
+            <div class="controlBox"><strong>Quyền kiểm soát của bạn:</strong> Coach chỉ nhận câu hỏi khi bạn bấm “Gửi”. Bạn có thể quay lại và không gửi gì.</div>
+            <div class="actions">
+              <button class="btn" onclick="backToChoices()">← Không gửi, quay lại</button>
+              <button class="btn primary" onclick="sendQuestion()">Gửi câu hỏi</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN C -->
+        <div class="screen" id="screen-C">
+          <div class="result">
+            <div class="resultIcon">✓</div>
+            <div class="eyebrow">Bạn đã chọn C</div>
+            <h2>Không cần follow-up cho check-in này</h2>
+            <p>Lab Coach sẽ không tiếp tục nhắn về case này. Bạn vẫn có thể chủ động hỏi hỗ trợ sau nếu muốn.</p>
+            <div class="controlBox"><strong>Quyền kiểm soát của bạn:</strong> lựa chọn này không làm giảm ưu tiên, điểm số hay quyền nhận hỗ trợ về sau.</div>
+            <div class="card soft" style="margin-top:14px">
+              <div class="label">Tùy chọn thêm</div>
+              <div style="display:flex;align-items:flex-start;gap:10px"><input type="checkbox" id="futureOptOut" style="margin-top:4px"><label for="futureOptOut" style="font-size:14px;line-height:1.45">Tắt các check-in chủ động kiểu này trong tương lai. Mình vẫn có thể tự raise hand / nhắn Coach khi cần.</label></div>
+            </div>
+            <div class="actions">
+              <button class="btn" onclick="backToChoices()">← Đổi lựa chọn</button>
+              <button class="btn primary" onclick="confirmC()">Xác nhận</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- OPT OUT -->
+        <div class="screen" id="screen-optout">
+          <div class="result">
+            <div class="resultIcon">🔕</div>
+            <div class="eyebrow">Opt-out</div>
+            <h2>Đã tắt check-in chủ động kiểu này</h2>
+            <p>Bạn sẽ không nhận các check-in được khởi tạo từ signal học tập tương tự. Bạn vẫn có thể chủ động yêu cầu hỗ trợ bất cứ lúc nào.</p>
+            <div class="controlBox"><strong>Quyền kiểm soát của bạn:</strong> opt-out không làm thay đổi quyền truy cập support.</div>
+            <div class="actions"><button class="btn" onclick="backToChoices()">← Quay lại lựa chọn</button><button class="btn primary" onclick="resetAll()">Kết thúc & reset</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+  let lastDraft='';
+  const ids=['screen-coach','screen-learner','screen-A','screen-B','screen-C','screen-optout'];
+  function show(id){ids.forEach(x=>document.getElementById(x).classList.toggle('active',x===id));window.scrollTo({top:0,behavior:'smooth'});}
+  function setSteps(n){[1,2,3].forEach(i=>document.getElementById('s'+i).classList.toggle('active',i===n));}
+  function header(role,title,sub,pill){document.getElementById('roleEyebrow').textContent=role;document.getElementById('screenTitle').textContent=title;document.getElementById('screenSub').textContent=sub;document.getElementById('rolePill').textContent=pill;}
+  function sendDraft(){
+    lastDraft=document.getElementById('draft').value.trim();
+    if(!lastDraft){showToast('Draft đang trống — cần nội dung trước khi gửi.');return;}
+    document.getElementById('sentMessage').innerText=lastDraft;
+    show('screen-learner');setSteps(2);header('Learner view','Bạn vừa nhận một check-in','Bạn có thể trả lời, bỏ qua hoặc opt-out.','No reply required');
+  }
+  function choose(c){show('screen-'+c);setSteps(3);header('Learner view','Lựa chọn '+c,'Bạn có thể đổi lựa chọn trước khi xác nhận.','Learner controls next step');}
+  function backToChoices(){show('screen-learner');setSteps(3);header('Learner view','Chọn cách bạn muốn tiếp tục','Không có lựa chọn nào ảnh hưởng điểm số hay quyền nhận support.','You can change your mind');}
+  function optOut(){show('screen-optout');setSteps(3);header('Learner view','Opt-out check-in chủ động','Bạn vẫn có thể tự yêu cầu hỗ trợ sau này.','Opt-out available');}
+  function sendQuestion(){
+    const q=document.getElementById('question').value.trim();
+    if(!q){showToast('Hãy nhập câu hỏi hoặc quay lại.');return;}
+    const ctx=document.getElementById('includeContext').checked?' Có gửi kèm context đã chọn.':' Không gửi kèm context kỹ thuật.';
+    showToast('Đã gửi câu hỏi cho Lab Coach.'+ctx);
+  }
+  function confirmC(){
+    if(document.getElementById('futureOptOut').checked){show('screen-optout');header('Learner view','Opt-out check-in chủ động','Bạn vẫn có thể tự yêu cầu hỗ trợ sau này.','Opt-out saved');}
+    else showToast('Đã xác nhận: không follow-up cho check-in này.');
+  }
+  function resetAll(){
+    document.getElementById('draft').value=`Mình thấy bạn đã ghi nhận lỗi VRAM ở checkpoint 2. Nếu bạn muốn, mình có thể giúp theo một trong ba cách dưới đây. Bạn không bắt buộc phải trả lời, và có thể chọn không nhận follow-up.\n\n(A) Nhận hướng dẫn giảm VRAM\n(B) Đặt câu hỏi cho Lab Coach\n(C) Tự tiếp tục và không cần follow-up`;
+    document.getElementById('question').value='Mình vẫn gặp OOM khi chạy checkpoint 2. Với cấu hình lab này, mình nên ưu tiên giảm batch size hay thay đổi precision trước?';
+    document.getElementById('includeContext').checked=true;document.getElementById('futureOptOut').checked=false;
+    show('screen-coach');setSteps(1);header('Lab Coach view','Case L-07 · checkpoint 2','AI đã soạn draft; Coach quyết định có gửi hay không.','Coach controls send');
+    showToast('Đã reset về common context.');
+  }
+  function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove('show'),2600)}
+</script>
+</body>
+</html>
