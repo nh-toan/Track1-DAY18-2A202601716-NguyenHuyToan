@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI Support Radar — giao diện hợp nhất cho 4 solution options A, B, C, D." />
+  <title>AI Support Radar — 4 Options</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">AI Support Radar · Unified Prototype</p>
+        <h1>4 phương án · 1 layout thống nhất</h1>
+        <p class="lede">Chọn Option A, B, C hoặc D để xem cùng một khung giao diện, với cơ chế hỗ trợ khác nhau.</p>
+      </div>
+      <button id="overviewBtn" class="btn btn-secondary" type="button">Tổng quan</button>
+    </header>
+
+    <nav class="option-tabs" aria-label="Chọn solution option">
+      <button class="option-tab active" data-option="A" type="button"><span>A</span> Evidence triage</button>
+      <button class="option-tab" data-option="B" type="button"><span>B</span> Coach check-in</button>
+      <button class="option-tab" data-option="C" type="button"><span>C</span> Issue cluster</button>
+      <button class="option-tab" data-option="D" type="button"><span>D</span> Help brief</button>
+    </nav>
+
+    <main>
+      <section id="overviewView" class="overview-card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Giao diện tổng</p>
+            <h2>Chọn một option để bắt đầu</h2>
+          </div>
+          <span class="badge">Same layout · Different mechanism</span>
+        </div>
+        <p class="overview-copy">Cả 4 option dùng chung một cấu trúc: <strong>Bối cảnh → AI hỗ trợ → Người dùng quyết định → Kết quả</strong>. Khi chuyển option, chỉ nội dung và hành động thay đổi.</p>
+        <div class="overview-grid" id="overviewGrid"></div>
+      </section>
+
+      <section id="optionView" class="option-view" hidden>
+        <div class="context-strip">
+          <div>
+            <p class="eyebrow">Bối cảnh chung</p>
+            <h2 id="optionTitle">Option A</h2>
+            <p id="optionSubtitle" class="muted"></p>
+          </div>
+          <div class="context-meta">
+            <span class="meta-pill">Lab LoRA</span>
+            <span class="meta-pill">Checkpoint 2</span>
+            <span id="rolePill" class="meta-pill accent">Lab Coach</span>
+          </div>
+        </div>
+
+        <div class="workspace-grid">
+          <section class="main-card">
+            <div class="flow-steps" aria-label="Luồng xử lý">
+              <div class="flow-step active"><span>1</span><b>Bối cảnh</b></div>
+              <div class="flow-line"></div>
+              <div class="flow-step active"><span>2</span><b>AI hỗ trợ</b></div>
+              <div class="flow-line"></div>
+              <div class="flow-step active"><span>3</span><b>Bạn quyết định</b></div>
+              <div class="flow-line"></div>
+              <div class="flow-step"><span>4</span><b>Kết quả</b></div>
+            </div>
+
+            <div class="content-block">
+              <div class="block-heading">
+                <div>
+                  <p class="eyebrow">01 · Bối cảnh</p>
+                  <h3 id="contextHeading"></h3>
+                </div>
+                <span id="privacyBadge" class="badge subtle"></span>
+              </div>
+              <div id="contextBody" class="surface"></div>
+            </div>
+
+            <div class="content-block">
+              <div class="block-heading">
+                <div>
+                  <p class="eyebrow">02 · AI hỗ trợ</p>
+                  <h3 id="aiHeading"></h3>
+                </div>
+                <span class="badge subtle">AI không tự hành động</span>
+              </div>
+              <div id="aiBody" class="surface"></div>
+            </div>
+
+            <div class="content-block">
+              <div class="block-heading">
+                <div>
+                  <p class="eyebrow">03 · Bạn quyết định</p>
+                  <h3 id="decisionHeading"></h3>
+                </div>
+              </div>
+              <div id="decisionBody" class="surface"></div>
+            </div>
+
+            <div id="outcomeBlock" class="outcome-block" hidden>
+              <div>
+                <p class="eyebrow">04 · Kết quả mô phỏng</p>
+                <h3 id="outcomeTitle">Đã ghi nhận quyết định</h3>
+                <p id="outcomeText" class="muted"></p>
+              </div>
+              <button id="resetOptionBtn" class="btn btn-secondary" type="button">Làm lại option này</button>
+            </div>
+          </section>
+
+          <aside class="side-card">
+            <p class="eyebrow">Option snapshot</p>
+            <h3 id="snapshotTitle"></h3>
+            <dl class="snapshot-list">
+              <div><dt>Trigger</dt><dd id="snapshotTrigger"></dd></div>
+              <div><dt>User làm gì?</dt><dd id="snapshotUser"></dd></div>
+              <div><dt>AI làm gì?</dt><dd id="snapshotAI"></dd></div>
+              <div><dt>Trade-off</dt><dd id="snapshotTradeoff"></dd></div>
+            </dl>
+            <div class="principle-box">
+              <strong>Nguyên tắc chung</strong>
+              <p>Không dùng một behavioral signal đơn lẻ để kết luận learner đang struggle. Luôn giữ quyền review, chỉnh sửa, defer hoặc opt-out.</p>
+            </div>
+            <button id="backOverviewBtn" class="btn btn-secondary full" type="button">← Quay lại giao diện tổng</button>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Human–AI Design Pass · Unified A/B/C/D Prototype</span>
+      <span>Không gửi hoặc lưu dữ liệu thật</span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
