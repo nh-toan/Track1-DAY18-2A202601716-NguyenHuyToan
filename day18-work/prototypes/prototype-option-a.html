@@ -141,12 +141,17 @@
   .tag.done{background:var(--accent-soft); color:var(--accent);}
   .tag.done::before{display:none;}
 
-  .foot{display:flex; justify-content:center; gap:20px;}
-  .foot button{
-    background:none; border:none; padding:4px;
-    color:var(--ink-3); font-size:12.5px; cursor:pointer; text-decoration:underline; text-underline-offset:3px;
+  .foot{
+    margin-top:20px; padding-top:24px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center;
   }
-  .foot button:hover{color:var(--ink-2);}
+  .foot span { font-size: 13px; color: var(--ink-3); }
+  .foot button{
+    background:transparent; border:1px solid var(--line); padding:8px 16px; border-radius:8px;
+    color:var(--ink-2); font-size:13px; cursor:pointer; font-weight:500;
+    transition:border-color .16s ease, color .16s ease;
+  }
+  .foot button:hover{color:var(--ink); border-color:var(--line-2);}
   .foot button:focus-visible{outline:2px solid var(--focus); outline-offset:2px;}
 
   .notes{
@@ -282,8 +287,11 @@
   <div class="list" id="list"></div>
 
   <div class="foot">
-    <button type="button" id="resetAll">Bắt đầu lại</button>
-    <button type="button" id="notesToggle" aria-expanded="false">Ghi chú facilitator</button>
+    <span>Human–AI Design Pass — Micro-Prototype Option A (Gate 4 Test-Ready)</span>
+    <div style="display:flex; gap:12px;">
+      <button type="button" id="notesToggle" aria-expanded="false">Ghi chú facilitator</button>
+      <button type="button" id="resetAll">🔄 Reset trạng thái ban đầu</button>
+    </div>
   </div>
 
   <section class="notes" id="notes">
@@ -304,7 +312,7 @@
 
   var people = [
     {
-      id:"A", name:"Minh Anh", initials:"MA", time:"6 phút trước",
+      id:"A", name:"Learner 3 (L-07)", initials:"L3", time:"6 phút trước",
       line:"Tự báo kẹt VRAM ở checkpoint 2",
       tag:{cls:"one", text:"1 ghi chú"},
       source:"Learner tự báo",
