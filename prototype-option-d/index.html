@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Micro-prototype cho Option D: learner chủ động tạo yêu cầu hỗ trợ." />
+  <title>Help Brief — Lab LoRA</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="page-header">
+      <p class="eyebrow">AI Support Radar · Micro-prototype</p>
+      <h1>Gửi yêu cầu hỗ trợ</h1>
+      <p class="lede">Tạo một yêu cầu ngắn cho TA. Bạn quyết định nội dung nào được chia sẻ.</p>
+    </header>
+
+    <section class="scenario-card" aria-labelledby="scenario-title">
+      <div>
+        <p class="eyebrow" id="scenario-title">Bối cảnh buổi lab</p>
+        <p><strong>Lab LoRA · Checkpoint 2</strong></p>
+        <p class="muted">Bạn đang gặp lỗi VRAM khi chạy cấu hình mô hình.</p>
+      </div>
+      <span class="status-badge">Không gửi dữ liệu thật</span>
+    </section>
+
+    <p id="live-status" class="sr-only" aria-live="polite"></p>
+
+    <section id="form-view" class="view-card" aria-labelledby="request-title">
+      <div class="section-heading">
+        <div>
+          <p class="step-label">Bước 1 / 2</p>
+          <h2 id="request-title">Bạn cần hỗ trợ điều gì?</h2>
+        </div>
+        <p class="privacy-note">AI chỉ dùng thông tin bạn nhập hoặc chọn chia sẻ.</p>
+      </div>
+
+      <form id="help-form" novalidate>
+        <fieldset>
+          <legend>Loại hỗ trợ bạn muốn</legend>
+          <div class="choice-grid">
+            <label class="choice-card">
+              <input type="radio" name="supportType" value="Giải thích lỗi và bước tiếp theo" checked />
+              <span>Giải thích lỗi và bước tiếp theo</span>
+            </label>
+            <label class="choice-card">
+              <input type="radio" name="supportType" value="Kiểm tra cấu hình hoặc code" />
+              <span>Kiểm tra cấu hình hoặc code</span>
+            </label>
+            <label class="choice-card">
+              <input type="radio" name="supportType" value="Hẹn TA hỗ trợ trực tiếp" />
+              <span>Hẹn TA hỗ trợ trực tiếp</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="field-group">
+          <label for="issue">Bạn đang kẹt ở đâu? <span aria-hidden="true">*</span></label>
+          <textarea id="issue" name="issue" rows="5" placeholder="Ví dụ: Khi chạy checkpoint 2, mình gặp CUDA out of memory và chưa biết giảm VRAM ở đâu."></textarea>
+          <p id="issue-error" class="field-error" role="alert"></p>
+        </div>
+
+        <fieldset>
+          <legend>Bạn đã thử gì? <span class="optional">(có thể chọn nhiều)</span></legend>
+          <div class="check-list">
+            <label><input type="checkbox" name="attempt" value="Đọc lại slide hoặc tài liệu lab" /> Đọc lại slide hoặc tài liệu lab</label>
+            <label><input type="checkbox" name="attempt" value="Tìm kiếm hoặc dùng AI để hỏi" /> Tìm kiếm hoặc dùng AI để hỏi</label>
+            <label><input type="checkbox" name="attempt" value="Đổi cấu hình hoặc thử chạy lại" /> Đổi cấu hình hoặc thử chạy lại</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Bạn muốn chia sẻ gì với TA? <span class="optional">(tùy chọn)</span></legend>
+          <p class="helper-text">Bạn có thể bỏ trống. AI không tự lấy dữ liệu từ tiến độ của bạn.</p>
+          <div class="check-list">
+            <label><input type="checkbox" id="share-checkpoint" value="Checkpoint 2 — lỗi VRAM" /> Checkpoint 2 — lỗi VRAM</label>
+            <label><input type="checkbox" id="share-attempts" value="Danh sách điều đã thử" /> Danh sách điều đã thử</label>
+          </div>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="button" class="button button-secondary" id="continue-button">Tự tiếp tục, không gửi</button>
+          <button type="submit" class="button button-primary">Xem bản nháp</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="preview-view" class="view-card" aria-labelledby="preview-title" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="step-label">Bước 2 / 2</p>
+          <h2 id="preview-title">Kiểm tra yêu cầu trước khi gửi</h2>
+        </div>
+        <p class="privacy-note">Bạn vẫn có thể sửa hoặc không gửi.</p>
+      </div>
+
+      <div class="ai-disclosure">
+        <strong>Bản nháp do AI hỗ trợ cấu trúc</strong>
+        <p>AI chỉ tóm tắt từ thông tin bạn đã nhập/chọn. AI không đánh giá năng lực và không bảo đảm TA phản hồi ngay.</p>
+      </div>
+
+      <article class="brief-card" aria-label="Bản nháp yêu cầu hỗ trợ">
+        <dl>
+          <div><dt>Loại hỗ trợ</dt><dd id="preview-support"></dd></div>
+          <div><dt>Vấn đề bạn mô tả</dt><dd id="preview-issue"></dd></div>
+          <div><dt>Điều đã thử</dt><dd id="preview-attempts"></dd></div>
+          <div><dt>Nội dung sẽ gửi cho TA</dt><dd id="preview-shared"></dd></div>
+          <div><dt>Thông tin còn thiếu</dt><dd id="preview-missing"></dd></div>
+        </dl>
+      </article>
+
+      <div class="form-actions">
+        <button type="button" class="button button-secondary" id="edit-button">Quay lại chỉnh sửa</button>
+        <button type="button" class="button button-primary" id="send-button">Xác nhận gửi cho TA</button>
+      </div>
+    </section>
+
+    <section id="success-view" class="view-card outcome-view" aria-labelledby="success-title" hidden>
+      <p class="step-label">Yêu cầu đã được tạo</p>
+      <h2 id="success-title">TA sẽ thấy bản tóm tắt bạn đã xác nhận</h2>
+      <p>Đây là prototype: không có dữ liệu nào được gửi hoặc lưu bên ngoài trình duyệt.</p>
+      <button type="button" class="button button-primary" data-reset>Gửi một yêu cầu khác</button>
+    </section>
+
+    <section id="continue-view" class="view-card outcome-view" aria-labelledby="continue-title" hidden>
+      <p class="step-label">Bạn chọn tự tiếp tục</p>
+      <h2 id="continue-title">Chưa có yêu cầu nào được gửi</h2>
+      <p>Bạn luôn có thể quay lại tạo yêu cầu hỗ trợ khi cần.</p>
+      <button type="button" class="button button-primary" data-reset>Tạo yêu cầu hỗ trợ</button>
+    </section>
+
+    <footer>
+      <p>Prototype Option D · Dữ liệu và phản hồi chỉ được mô phỏng cho buổi test.</p>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
